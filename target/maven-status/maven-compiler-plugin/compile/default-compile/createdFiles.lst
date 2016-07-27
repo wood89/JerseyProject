@@ -1,0 +1,8 @@
+io\khasang\jersey\config\HibernateConfig.class
+io\khasang\jersey\service\HelloService.class
+io\khasang\jersey\config\AppSecurityConfig.class
+io\khasang\jersey\config\WebAppInitializer.class
+io\khasang\jersey\config\application\WebConfig.class
+io\khasang\jersey\config\AppContext.class
+io\khasang\jersey\config\SecurityInit.class
+io\khasang\jersey\service\AppController.class
