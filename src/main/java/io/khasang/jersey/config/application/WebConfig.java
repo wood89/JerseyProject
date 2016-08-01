@@ -4,28 +4,26 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
+// Говорим, что это конфигурация
 @Configuration
+// Включаем MVC
 @EnableWebMvc
-@ComponentScan({"io.khasang.jersey.config", "io.khasang.jersey.controller"})
+// Указываем где искать контроллеры и остальные компоненты
+@ComponentScan("io.khasang.jersey")
 public class WebConfig extends WebMvcConfigurerAdapter {
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/views/css/");
-        registry.addResourceHandler("/jpg/**").addResourceLocations("/WEB-INF/views/images/");
-        registry.addResourceHandler("/bootstrap/**").addResourceLocations("/WEB-INF/views/Content/");
+    @Bean
+    public UrlBasedViewResolver setupViewResolver() {
+        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
+        // указываем где будут лежать наши веб-страницы
+        resolver.setPrefix("/WEB-INF/views/");
+        // формат View который мы будем использовать
+        resolver.setSuffix(".jsp");
+        resolver.setViewClass(JstlView.class);
+        return resolver;
     }
 }
